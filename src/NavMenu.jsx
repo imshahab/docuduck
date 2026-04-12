@@ -23,22 +23,25 @@ export default function NavMenu() {
         </ul>
       </div>
 
-      <div class="mt-auto">
+      <div className="mt-auto">
         <div className="divider"></div>
-        {/* Theme Switch */}
-        <button
-          className="btn btn-sm btn-outline w-full"
-          onClick={() =>
-            document.documentElement.setAttribute(
-              "data-theme",
-              document.documentElement.getAttribute("data-theme") === "dark"
-                ? "light"
-                : "dark",
-            )
-          }
-        >
-          تغییر تم
-        </button>
+        <div className="flex flex-col justify-center items-center gap-3">
+          {/* Theme Switch */}
+          <button
+            className="btn btn-sm btn-outline w-full"
+            onClick={() =>
+              document.documentElement.setAttribute(
+                "data-theme",
+                document.documentElement.getAttribute("data-theme") === "dark"
+                  ? "light"
+                  : "dark",
+              )
+            }
+          >
+            تغییر تم
+          </button>
+          <small className="text-gray-500">قدرت گرفته از داکیوداک</small>
+        </div>
       </div>
     </div>
   );

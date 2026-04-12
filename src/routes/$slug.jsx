@@ -3,6 +3,8 @@ import { loadMarkdownBySlug } from "../markdownLoader";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useEffect, useState } from "react";
+import rehypeHighlight from "rehype-highlight";
+import "highlight.js/styles/github-dark.css";
 
 export const Route = createFileRoute("/$slug")({
   component: MarkdownPage,
@@ -122,7 +124,11 @@ function MarkdownPage() {
       className="prose prose-neutral dark:prose-invert max-w-full p-6"
       style={{ direction: "ltr" }}
     >
-      <Markdown remarkPlugins={[remarkGfm]} components={MarkdownComponents}>
+      <Markdown
+        remarkPlugins={[remarkGfm]}
+        rehypePlugins={[rehypeHighlight]}
+        components={MarkdownComponents}
+      >
         {content}
       </Markdown>
     </div>

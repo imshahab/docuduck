@@ -5,7 +5,7 @@ export const Route = createRootRoute({
   component: () => {
     return (
       <>
-        <div className="drawer drawer-end lg:drawer-open min-h-screen">
+        <div className="drawer drawer lg:drawer-open min-h-screen">
           <input id="doc-drawer" type="checkbox" className="drawer-toggle" />
 
           <main className="drawer-content p-6 bg-base-100">
