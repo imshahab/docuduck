@@ -1,22 +1,45 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
-import { getMarkdownPages } from "../getMarkdownPages";
+import { loadMarkdownBySlug } from "../markdownLoader";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { useEffect, useState } from "react";
 
 export const Route = createFileRoute("/$slug")({
   component: MarkdownPage,
 });
 
 function MarkdownPage() {
-  const markdownPages = getMarkdownPages();
   const { slug } = Route.useParams();
+  const [content, setContent] = useState(null);
 
-  const page = markdownPages.find((p) => p.slug === slug);
+  useEffect(() => {
+    setContent(null);
+    let cancelled = false;
+
+    async function load() {
+      const content = await loadMarkdownBySlug(slug);
+      if (!content) {
+        throw notFound();
+      }
+      if (!cancelled) {
+        setContent(content);
+      }
+    }
+
+    load();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [slug]);
+
+  if (!content) {
+    return <div>Loading…</div>;
+  }
 
   return (
     <article>
-      <h1>{page.title}</h1>
-      <Markdown remarkPlugins={[remarkGfm]}>{page.content}</Markdown>
+      <Markdown remarkPlugins={[remarkGfm]}>{content}</Markdown>
     </article>
   );
 }
