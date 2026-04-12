@@ -1,8 +1,8 @@
 This is a sample Markdown file to demonstrate some common features.
 
-## Introduction
+## معرفی
 
-Markdown is a lightweight markup language with plain text formatting syntax. It's designed to be easy to read and write, and it's often used for documentation, notes, and online content.
+این معرفی markdown است.
 
 ## Headings
 
@@ -53,7 +53,9 @@ Use backticks (`) to format inline code:  `print("Hello, world!")`
 Use triple backticks (```) to create code blocks. You can specify the language for syntax highlighting.
 
 ```python 
-def greet(name):  """Greets the person passed in as a parameter."""  print(f"Hello, {name}!") greet("World")
+def greet(name):  
+print(f"Hello, {name}!") 
+greet("World")
 ```
 
 ## Blockquotes
@@ -85,4 +87,4 @@ If you need to use a Markdown formatting character literally, you can escape it 
 For example:  `\*This is not italic\*` will render as *This is not italic*.```
 
 This is a fairly comprehensive sample.  You can copy and paste this into a `.md` file and view it with a Markdown editor or previewer.  Many text editors support Markdown previewing.
-````
+

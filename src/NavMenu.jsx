@@ -1,20 +1,45 @@
 import { Link } from "@tanstack/react-router";
 import { getMarkdownIndex } from "./markdownLoader";
 
-function NavMenu() {
+export default function NavMenu() {
   const markdownPages = getMarkdownIndex();
   return (
-    <div
-      className="nav-menu"
-      style={{ display: "flex", flexDirection: "column" }}
-    >
-      {markdownPages.map((slug, index) => (
-        <Link to="/$slug" key={index} params={{ slug: slug }}>
-          {slug}
-        </Link>
-      ))}
+    <div className="flex flex-col w-72 h-screen bg-base-200 p-4">
+      <h2 className="text-xl font-bold mb-4">مستندات</h2>
+      <div>
+        <ul className="menu menu-lg gap-1">
+          {markdownPages.map((slug, index) => (
+            <li>
+              <Link
+                to="/$slug"
+                key={index}
+                params={{ slug: slug }}
+                activeProps={{ className: "font-semibold text-primary" }}
+              >
+                {slug}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="mt-auto">
+        <div className="divider"></div>
+        {/* Theme Switch */}
+        <button
+          className="btn btn-sm btn-outline w-full"
+          onClick={() =>
+            document.documentElement.setAttribute(
+              "data-theme",
+              document.documentElement.getAttribute("data-theme") === "dark"
+                ? "light"
+                : "dark",
+            )
+          }
+        >
+          تغییر تم
+        </button>
+      </div>
     </div>
   );
 }
-
-export default NavMenu;
