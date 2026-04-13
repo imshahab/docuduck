@@ -13,21 +13,27 @@ export default function NavMenu({ changeThemeFn }) {
 
   return (
     <div className="flex flex-col w-72 h-screen bg-base-200 p-4">
-      <h2 className="text-xl font-bold mb-4">{config.title}</h2>
+      <h2 className="text-xl font-bold mb-4">{config.title || "داکیوداک"}</h2>
       <div className="h-full overflow-y-auto">
-        <ul className="menu menu-lg gap-1 w-full">
-          {markdownPages.map((page, index) => (
-            <li>
-              <Link
-                to="/$slug"
-                key={index}
-                params={{ slug: page.slug }}
-                activeProps={{ className: "font-semibold text-primary" }}
-              >
-                {page.label}
-              </Link>
-            </li>
-          ))}
+        <ul className="menu menu-lg gap-1 w-full h-full">
+          {markdownPages.length > 0 ? (
+            markdownPages.map((page, index) => (
+              <li>
+                <Link
+                  to="/$slug"
+                  key={index}
+                  params={{ slug: page.slug }}
+                  activeProps={{ className: "font-semibold text-primary" }}
+                >
+                  {page.label}
+                </Link>
+              </li>
+            ))
+          ) : (
+            <div className="h-full flex justify-center items-center">
+              <p className="text-center text-gray-400">اینجا خبری نیست...</p>
+            </div>
+          )}
         </ul>
       </div>
 
@@ -46,7 +52,9 @@ export default function NavMenu({ changeThemeFn }) {
           >
             تغییر تم
           </button>
-          <small className="text-gray-500">داکیوداک v0.0.1</small>
+          <span className="text-gray-500 text-xs">
+            🦆 داکیوداک v{__APP_VERSION__}
+          </span>
         </div>
       </div>
     </div>

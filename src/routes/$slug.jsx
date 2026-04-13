@@ -13,19 +13,21 @@ export const Route = createFileRoute("/$slug")({
 function MarkdownPage() {
   const { slug } = Route.useParams();
   const [content, setContent] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setContent(null);
+    setLoading(true);
     let cancelled = false;
 
     async function load() {
       const content = await loadMarkdownBySlug(slug);
-      if (!content) {
-        throw notFound();
-      }
+
       if (!cancelled) {
         setContent(content);
       }
+
+      setLoading(false);
     }
 
     load();
@@ -35,10 +37,20 @@ function MarkdownPage() {
     };
   }, [slug]);
 
-  if (!content) {
+  if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <span className="loading loading-spinner loading-lg text-primary" />
+      </div>
+    );
+  }
+
+  if (!content) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <span className="text-gray-400 text-base">
+          اینجا چیزی برای خوندن نیست...
+        </span>
       </div>
     );
   }
