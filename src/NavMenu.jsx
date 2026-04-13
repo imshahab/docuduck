@@ -26,7 +26,7 @@ export default function NavMenu({ changeThemeFn }) {
                   key={index}
                   params={{ slug: page.slug }}
                   className="text-sm"
-                  activeProps={{ className: "font-semibold text-primary" }}
+                  activeProps={{ className: "font-semibold text-secondary" }}
                 >
                   {page.label}
                 </Link>
