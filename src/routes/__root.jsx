@@ -22,12 +22,15 @@ export const Route = createRootRoute({
           <div className="drawer drawer lg:drawer-open min-h-screen">
             <input id="doc-drawer" type="checkbox" className="drawer-toggle" />
 
-            <main className="drawer-content p-6 bg-base-100">
+            <main className="drawer-content bg-base-100">
               <label
                 htmlFor="doc-drawer"
                 className="btn btn-primary drawer-button lg:hidden mb-4 sticky top-6"
               >
-                ☰ منو
+                <span>
+                  <img src="hamburger.svg" alt="hamburger icon" width={10} />
+                </span>
+                منو
               </label>
               <Outlet />
             </main>
