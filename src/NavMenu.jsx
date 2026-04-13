@@ -1,12 +1,16 @@
 import { Link } from "@tanstack/react-router";
 import { getMarkdownIndex } from "./markdownLoader";
+import { useContext } from "react";
+import { ConfigContext } from "./contexts";
 
-export default function NavMenu() {
+export default function NavMenu({ changeThemeFn }) {
+  const [config] = useContext(ConfigContext);
+
   const markdownPages = getMarkdownIndex();
   return (
     <div className="flex flex-col w-72 h-screen bg-base-200 p-4">
-      <h2 className="text-xl font-bold mb-4">مستندات</h2>
-      <div>
+      <h2 className="text-xl font-bold mb-4">{config.title}</h2>
+      <div className="h-full overflow-y-auto">
         <ul className="menu menu-lg gap-1">
           {markdownPages.map((slug, index) => (
             <li>
@@ -29,14 +33,12 @@ export default function NavMenu() {
           {/* Theme Switch */}
           <button
             className="btn btn-sm btn-outline w-full"
-            onClick={() =>
-              document.documentElement.setAttribute(
-                "data-theme",
-                document.documentElement.getAttribute("data-theme") === "dark"
-                  ? "light"
-                  : "dark",
-              )
-            }
+            onClick={() => {
+              const newTheme =
+                localStorage.getItem("theme") === "dark" ? "light" : "dark";
+              localStorage.setItem("theme", newTheme);
+              changeThemeFn();
+            }}
           >
             تغییر تم
           </button>
