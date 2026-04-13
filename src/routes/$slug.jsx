@@ -1,4 +1,4 @@
-import { createFileRoute, notFound } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { loadMarkdownBySlug } from "../markdownLoader";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -8,6 +8,9 @@ import "highlight.js/styles/github-dark.css";
 
 export const Route = createFileRoute("/$slug")({
   component: MarkdownPage,
+  head: ({ params }) => ({
+    meta: [{ title: params.slug }],
+  }),
 });
 
 function MarkdownPage() {

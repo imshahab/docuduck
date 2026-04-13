@@ -3,6 +3,9 @@ import config from "../../config.json";
 
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [{ title: config.title }],
+  }),
 });
 
 function Index() {

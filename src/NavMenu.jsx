@@ -13,7 +13,9 @@ export default function NavMenu({ changeThemeFn }) {
 
   return (
     <div className="flex flex-col w-72 h-screen bg-base-200 p-4">
-      <h2 className="text-xl font-bold mb-4">{config.title || "داکیوداک"}</h2>
+      <Link to="/" className="text-xl font-bold mb-4">
+        {config.title || "داکیوداک"}
+      </Link>
       <div className="h-full overflow-y-auto">
         <ul className="menu menu-lg gap-1 w-full h-full">
           {markdownPages.length > 0 ? (
@@ -23,6 +25,7 @@ export default function NavMenu({ changeThemeFn }) {
                   to="/$slug"
                   key={index}
                   params={{ slug: page.slug }}
+                  className="text-sm"
                   activeProps={{ className: "font-semibold text-primary" }}
                 >
                   {page.label}
