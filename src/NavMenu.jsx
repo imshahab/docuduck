@@ -11,7 +11,7 @@ export default function NavMenu({ changeThemeFn }) {
     <div className="flex flex-col w-72 h-screen bg-base-200 p-4">
       <h2 className="text-xl font-bold mb-4">{config.title}</h2>
       <div className="h-full overflow-y-auto">
-        <ul className="menu menu-lg gap-1">
+        <ul className="menu menu-lg gap-1 w-full">
           {markdownPages.map((slug, index) => (
             <li>
               <Link
