@@ -11,7 +11,7 @@ export const Route = createRootRoute({
           <main className="drawer-content p-6 bg-base-100">
             <label
               htmlFor="doc-drawer"
-              className="btn btn-primary drawer-button lg:hidden mb-4"
+              className="btn btn-primary drawer-button lg:hidden mb-4 sticky top-6"
             >
               ☰ منو
             </label>
