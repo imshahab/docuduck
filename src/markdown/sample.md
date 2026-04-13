@@ -1,3 +1,8 @@
+---
+order: 1
+label: sample stuff
+---
+
 This is a sample Markdown file to demonstrate some common features.
 
 ## معرفی

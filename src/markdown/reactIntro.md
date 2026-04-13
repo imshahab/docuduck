@@ -1,3 +1,8 @@
+---
+order: 2
+label: react stuff
+---
+
 0. easiest way to run a server: npx serve
 
 1. hydration:
