@@ -8,14 +8,11 @@ import "highlight.js/styles/github-dark.css";
 
 export const Route = createFileRoute("/$slug")({
   component: MarkdownPage,
-  head: ({ params }) => ({
-    meta: [{ title: params.slug }],
-  }),
 });
 
 function MarkdownPage() {
   const { slug } = Route.useParams();
-  const [content, setContent] = useState(null);
+  const [content, setContent] = useState({ body: null, attributes: {} });
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -28,6 +25,7 @@ function MarkdownPage() {
 
       if (!cancelled) {
         setContent(content);
+        document.title = content.attributes.label;
       }
 
       setLoading(false);
@@ -48,7 +46,7 @@ function MarkdownPage() {
     );
   }
 
-  if (!content) {
+  if (!content.body) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <span className="text-gray-400 text-base">
@@ -168,11 +166,10 @@ function MarkdownPage() {
         rehypePlugins={[rehypeHighlight]}
         components={MarkdownComponents}
       >
-        {content}
+        {content.body}
       </Markdown>
     </div>
   );
 }
 
 export default MarkdownPage;
-

@@ -30,6 +30,5 @@ export async function loadMarkdownBySlug(slug) {
   if (!loader) return null;
 
   const raw = await loader();
-  const { body } = fm(raw);
-  return body;
+  return fm(raw);
 }
