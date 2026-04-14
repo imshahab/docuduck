@@ -3,6 +3,7 @@ import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
 import { createRoot } from "react-dom/client";
 import "./main.css";
+import "@fontsource/vazirmatn";
 
 const router = createRouter({ routeTree });
 
