@@ -2,6 +2,8 @@ import { Link } from "@tanstack/react-router";
 import { getMarkdownIndex } from "./markdownLoader";
 import { useContext, useEffect, useState } from "react";
 import { ConfigContext } from "./contexts";
+import { GiDuck } from "react-icons/gi";
+import { LuCoffee } from "react-icons/lu";
 
 export default function NavMenu({ changeThemeFn }) {
   const [config] = useContext(ConfigContext);
@@ -26,7 +28,7 @@ export default function NavMenu({ changeThemeFn }) {
                   key={index}
                   params={{ slug: page.slug }}
                   className="text-sm"
-                  activeProps={{ className: "font-semibold text-secondary" }}
+                  activeProps={{ className: "font-semibold text-primary" }}
                 >
                   {page.label}
                 </Link>
@@ -43,21 +45,36 @@ export default function NavMenu({ changeThemeFn }) {
       <div className="mt-auto">
         <div className="divider"></div>
         <div className="flex flex-col justify-center items-center gap-3">
-          {/* Theme Switch */}
-          <button
-            className="btn btn-sm btn-outline w-full"
-            onClick={() => {
-              const newTheme =
-                localStorage.getItem("theme") === "dark" ? "light" : "dark";
-              localStorage.setItem("theme", newTheme);
-              changeThemeFn();
-            }}
-          >
-            تغییر تم
-          </button>
-          <span className="text-gray-500 text-xs">
-            🦆 داکیوداک v{__APP_VERSION__}
-          </span>
+          <div className="flex justify-between gap-2 w-full">
+            {/* Theme Switch */}
+            {config.coffee.show && (
+              <a
+                href={config.coffee.link}
+                target="_blank"
+                className="btn btn-sm btn-outline flex-1"
+              >
+                <LuCoffee size={16}></LuCoffee>
+              </a>
+            )}
+            <button
+              className="btn btn-sm btn-outline flex-4"
+              onClick={() => {
+                const newTheme =
+                  localStorage.getItem("theme") === "dark" ? "light" : "dark";
+                localStorage.setItem("theme", newTheme);
+                changeThemeFn();
+              }}
+            >
+              تغییر تم
+            </button>
+          </div>
+
+          <div className="flex justify-center items-center gap-1">
+            <GiDuck size={12} className="text-gray-500"></GiDuck>
+            <span className="text-gray-500 text-xs">
+              داکیوداک v{__APP_VERSION__}
+            </span>
+          </div>
         </div>
       </div>
     </div>

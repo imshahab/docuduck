@@ -3,6 +3,7 @@ import { createRootRoute, Outlet, HeadContent } from "@tanstack/react-router";
 import { ConfigContext } from "../contexts";
 import { useState } from "react";
 import config from "../../config.json";
+import { LuMenu } from "react-icons/lu";
 
 export const Route = createRootRoute({
   component: () => {
@@ -25,11 +26,9 @@ export const Route = createRootRoute({
             <main className="drawer-content bg-base-100">
               <label
                 htmlFor="doc-drawer"
-                className="btn btn-primary drawer-button lg:hidden mb-4 sticky top-6"
+                className="btn btn-primary drawer-button lg:hidden mb-4 sticky top-6 right-4"
               >
-                <span>
-                  <img src="hamburger.svg" alt="hamburger icon" width={10} />
-                </span>
+                <LuMenu width={16}></LuMenu>
                 منو
               </label>
               <Outlet />
