@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github-dark.css";
 import { ConfigContext } from "../contexts";
+import { GiDuckPalm } from "react-icons/gi";
 
 export const Route = createFileRoute("/$slug")({
   component: MarkdownPage,
@@ -54,15 +55,15 @@ function MarkdownPage() {
   if (body === "") {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <span className="text-gray-400 text-base">
-          اینجا چیزی برای خوندن نیست...
-        </span>
+        <GiDuckPalm size={36} className="text-gray-400 "></GiDuckPalm>
+        <p className="text-gray-400 text-base">اینجا چیزی برای خوندن نیست...</p>
       </div>
     );
   } else if (body === null) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <span className="text-gray-400 text-base">صفحه پیدا نشد... </span>
+      <div className="min-h-screen flex items-center justify-center flex flex-col gap-2">
+        <GiDuckPalm size={36} className="text-gray-400 "></GiDuckPalm>
+        <p className="text-gray-400 text-base">صفحه پیدا نشد...</p>
       </div>
     );
   }
