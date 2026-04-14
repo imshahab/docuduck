@@ -57,14 +57,23 @@ function MarkdownPage() {
       </div>
     );
   }
-  const PERSIAN_REGEX = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF]/;
+
+  const PERSIAN_REGEX = /\p{Script=Arabic}/u;
   function hasPersian(text) {
     return PERSIAN_REGEX.test(text);
   }
 
+  function extractText(node) {
+    if (typeof node === "string") return node;
+    if (typeof node === "number") return node.toString();
+    if (Array.isArray(node)) return node.map(extractText).join("");
+    if (node?.props?.children) return extractText(node.props.children);
+    return "";
+  }
+
   const MarkdownComponents = {
     p: ({ children }) => {
-      const text = children?.toString?.() ?? "";
+      const text = extractText(children);
       const isRTL = hasPersian(text);
 
       return (
@@ -78,65 +87,80 @@ function MarkdownPage() {
     },
 
     h1: ({ children }) => {
-      const text = children?.toString?.() ?? "";
+      const text = extractText(children);
       const isRTL = hasPersian(text);
 
       return <h1 dir={isRTL ? "rtl" : "ltr"}>{children}</h1>;
     },
 
     h2: ({ children }) => {
-      const text = children?.toString?.() ?? "";
+      const text = extractText(children);
       const isRTL = hasPersian(text);
 
       return <h2 dir={isRTL ? "rtl" : "ltr"}>{children}</h2>;
     },
 
     h3: ({ children }) => {
-      const text = children?.toString?.() ?? "";
+      const text = extractText(children);
       const isRTL = hasPersian(text);
 
       return <h3 dir={isRTL ? "rtl" : "ltr"}>{children}</h3>;
     },
 
     h4: ({ children }) => {
-      const text = children?.toString?.() ?? "";
+      const text = extractText(children);
       const isRTL = hasPersian(text);
 
       return <h4 dir={isRTL ? "rtl" : "ltr"}>{children}</h4>;
     },
 
     h5: ({ children }) => {
-      const text = children?.toString?.() ?? "";
+      const text = extractText(children);
       const isRTL = hasPersian(text);
 
       return <h5 dir={isRTL ? "rtl" : "ltr"}>{children}</h5>;
     },
 
     h6: ({ children }) => {
-      const text = children?.toString?.() ?? "";
+      const text = extractText(children);
       const isRTL = hasPersian(text);
 
       return <h6 dir={isRTL ? "rtl" : "ltr"}>{children}</h6>;
     },
 
     li: ({ children }) => {
-      const text = children?.toString?.() ?? "";
+      const text = extractText(children);
       const isRTL = hasPersian(text);
 
       return <li dir={isRTL ? "rtl" : "ltr"}>{children}</li>;
     },
 
     blockquote: ({ children }) => {
-      const text = children?.toString?.() ?? "";
+      const text = extractText(children);
       const isRTL = hasPersian(text);
 
       return <blockquote dir={isRTL ? "rtl" : "ltr"}>{children}</blockquote>;
+    },
+    table: ({ children }) => {
+      const text = extractText(children);
+      const isRTL = hasPersian(text);
+
+      return (
+        <div className="overflow-x-auto">
+          <table
+            dir={isRTL ? "rtl" : "ltr"}
+            style={{ textAlign: isRTL ? "right" : "left" }}
+          >
+            {children}
+          </table>
+        </div>
+      );
     },
   };
 
   return (
     <div
-      className="prose prose-neutral dark:prose-invert max-w-full p-6"
+      className="prose prose-neutral dark:prose-invert max-w-full py-6 px-8"
       style={{ direction: "ltr" }}
     >
       <Markdown
@@ -151,3 +175,4 @@ function MarkdownPage() {
 }
 
 export default MarkdownPage;
+
