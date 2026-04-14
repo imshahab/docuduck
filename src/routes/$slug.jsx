@@ -2,9 +2,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import { loadMarkdownBySlug } from "../markdownLoader";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github-dark.css";
+import { ConfigContext } from "../contexts";
 
 export const Route = createFileRoute("/$slug")({
   component: MarkdownPage,
@@ -12,11 +13,14 @@ export const Route = createFileRoute("/$slug")({
 
 function MarkdownPage() {
   const { slug } = Route.useParams();
-  const [content, setContent] = useState({ body: null, attributes: {} });
+  const [body, setBody] = useState("");
+  const [attributes, setAttributes] = useState({});
   const [loading, setLoading] = useState(false);
+  const [config] = useContext(ConfigContext);
 
   useEffect(() => {
-    setContent(null);
+    setBody("");
+    setAttributes({});
     setLoading(true);
     let cancelled = false;
 
@@ -24,8 +28,9 @@ function MarkdownPage() {
       const content = await loadMarkdownBySlug(slug);
 
       if (!cancelled) {
-        setContent(content);
-        document.title = content.attributes.label;
+        setBody(content.body);
+        setAttributes(content.attributes);
+        document.title = content.attributes?.label || config.title;
       }
 
       setLoading(false);
@@ -46,12 +51,18 @@ function MarkdownPage() {
     );
   }
 
-  if (!content.body) {
+  if (body === "") {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <span className="text-gray-400 text-base">
           اینجا چیزی برای خوندن نیست...
         </span>
+      </div>
+    );
+  } else if (body === null) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <span className="text-gray-400 text-base">صفحه پیدا نشد... </span>
       </div>
     );
   }
@@ -166,7 +177,7 @@ function MarkdownPage() {
         rehypePlugins={[rehypeHighlight]}
         components={MarkdownComponents}
       >
-        {content.body}
+        {body}
       </Markdown>
     </div>
   );

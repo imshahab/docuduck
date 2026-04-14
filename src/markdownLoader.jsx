@@ -27,7 +27,7 @@ export async function loadMarkdownBySlug(slug) {
   const path = `/src/markdown/${slug}.md`;
   const loader = modules[path];
 
-  if (!loader) return null;
+  if (!loader) return { body: null, attributes: {} };
 
   const raw = await loader();
   return fm(raw);
