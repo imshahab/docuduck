@@ -14,7 +14,7 @@ export default function NavMenu({ changeThemeFn }) {
   }, []);
 
   return (
-    <div className="flex flex-col w-72 h-screen bg-base-200 p-4">
+    <div className="flex flex-col w-72 h-[100dvh] bg-base-200 p-4">
       <Link to="/" className="text-xl font-bold mb-4">
         {config.title || "داکیوداک"}
       </Link>

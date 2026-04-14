@@ -19,7 +19,7 @@ export const Route = createRootRoute({
     return (
       <ConfigContext.Provider value={configHook}>
         <div data-theme={theme}>
-          <div className="drawer drawer lg:drawer-open min-h-[100dvh]">
+          <div className="drawer drawer lg:drawer-open min-h-screen">
             <input id="doc-drawer" type="checkbox" className="drawer-toggle" />
 
             <main className="drawer-content bg-base-100">
