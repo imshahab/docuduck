@@ -17,7 +17,7 @@ function Index() {
 
   return (
     <div>
-      <div className="min-h-screen flex items-center justify-center flex flex-col gap-2">
+      <div className="h-[100dvh] flex items-center justify-center flex flex-col gap-2">
         <LuSprout size={36}></LuSprout>
         <p className="text-base">{config.welcome || "خوش اومدین!"}</p>
         <span className="text-gray-400 text-sm">
