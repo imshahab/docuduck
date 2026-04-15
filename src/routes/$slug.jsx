@@ -17,7 +17,7 @@ function MarkdownPage() {
   const [body, setBody] = useState("");
   const [attributes, setAttributes] = useState({});
   const [loading, setLoading] = useState(false);
-  const [config] = useContext(ConfigContext);
+  const config = useContext(ConfigContext);
 
   useEffect(() => {
     setBody("");

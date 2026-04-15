@@ -6,7 +6,7 @@ import { GiDuck } from "react-icons/gi";
 import { LuCoffee } from "react-icons/lu";
 
 export default function NavMenu({ changeThemeFn }) {
-  const [config] = useContext(ConfigContext);
+  const config = useContext(ConfigContext);
   const [markdownPages, setMarkdownPages] = useState([]);
 
   useEffect(() => {

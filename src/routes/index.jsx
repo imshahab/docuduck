@@ -9,7 +9,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const [config] = useContext(ConfigContext);
+  const config = useContext(ConfigContext);
 
   useEffect(() => {
     document.title = config.title;
