@@ -151,6 +151,9 @@ function MarkdownPage() {
 
       return <blockquote dir={isRTL ? "rtl" : "ltr"}>{children}</blockquote>;
     },
+    ul: ({ children }) => {
+      return <ul style={{ margin: 20 }}>{children}</ul>;
+    },
     table: ({ children }) => {
       const text = extractText(children);
       const isRTL = hasPersian(text);
