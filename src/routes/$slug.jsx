@@ -142,7 +142,14 @@ function MarkdownPage() {
       const text = extractText(children);
       const isRTL = hasPersian(text);
 
-      return <li dir={isRTL ? "rtl" : "ltr"}>{children}</li>;
+      return (
+        <li
+          dir={isRTL ? "rtl" : "ltr"}
+          style={isRTL ? { textAlign: "right" } : { textAlign: "left" }}
+        >
+          {children}
+        </li>
+      );
     },
 
     blockquote: ({ children }) => {
