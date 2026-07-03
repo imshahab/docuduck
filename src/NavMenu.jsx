@@ -4,13 +4,20 @@ import { useContext, useEffect, useState } from "react";
 import { ConfigContext } from "./contexts";
 import { GiDuck } from "react-icons/gi";
 import { LuCoffee } from "react-icons/lu";
+import SearchBox from "./SearchBox";
 
 export default function NavMenu({ changeThemeFn }) {
   const config = useContext(ConfigContext);
   const [markdownPages, setMarkdownPages] = useState([]);
 
   useEffect(() => {
-    getMarkdownIndex().then(setMarkdownPages);
+    let cancelled = false;
+    getMarkdownIndex().then((index) => {
+      if (!cancelled) setMarkdownPages(index);
+    });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   return (
@@ -18,14 +25,15 @@ export default function NavMenu({ changeThemeFn }) {
       <Link to="/" className="text-xl font-bold mb-4">
         {config.title || "داکیوداک"}
       </Link>
-      <div className="h-full overflow-y-auto">
-        <ul className="menu menu-lg gap-1 w-full h-full">
+      <SearchBox />
+
+      <div className="h-full overflow-y-auto overflow-x-hidden">
+        <ul className="menu menu-lg gap-1 w-full">
           {markdownPages.length > 0 ? (
-            markdownPages.map((page, index) => (
-              <li>
+            markdownPages.map((page) => (
+              <li key={page.slug}>
                 <Link
                   to="/$slug"
-                  key={index}
                   params={{ slug: page.slug }}
                   className="text-sm"
                   activeProps={{ className: "font-semibold text-primary" }}
@@ -46,7 +54,6 @@ export default function NavMenu({ changeThemeFn }) {
         <div className="divider"></div>
         <div className="flex flex-col justify-center items-center gap-3">
           <div className="flex justify-between gap-2 w-full">
-            {/* Theme Switch */}
             {config.coffee.show && (
               <a
                 href={config.coffee.link}

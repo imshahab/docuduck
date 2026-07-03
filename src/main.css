@@ -9,3 +9,261 @@ body {
 .prose {
   unicode-bidi: plaintext;
 }
+
+code {
+  display: inline-block;
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* Search modal */
+.search-modal {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: auto;
+  color: inherit;
+  width: min(640px, calc(100% - 2rem));
+  max-height: 80vh;
+  margin-top: 8vh;
+  inset: 0;
+}
+
+.search-modal[open] {
+  animation: search-modal-in 0.16s ease-out;
+}
+
+@keyframes search-modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.search-modal::backdrop {
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  animation: search-modal-backdrop-in 0.16s ease-out;
+}
+
+@keyframes search-modal-backdrop-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.search-modal__panel {
+  width: 100%;
+  background: var(--color-base-100, #fff);
+  border-radius: 1rem;
+  box-shadow: 0 24px 56px -12px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: 80vh;
+  border: 1px solid color-mix(in oklab, var(--color-base-content, #000) 12%, transparent);
+}
+
+[data-theme="dark"] .search-modal__panel {
+  background: color-mix(in oklab, var(--color-base-200, #1e1e20) 92%, transparent);
+}
+
+.search-modal__header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid color-mix(in oklab, var(--color-base-content, #000) 10%, transparent);
+}
+
+.search-modal__input {
+  flex: 1;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: inherit;
+  min-width: 0;
+}
+
+.search-modal__input::placeholder {
+  color: color-mix(in oklab, var(--color-base-content, #000) 40%, transparent);
+  font-weight: 400;
+}
+
+.search-modal__count {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--color-base-content, #000) 8%, transparent);
+  color: color-mix(in oklab, var(--color-base-content, #000) 65%, transparent);
+}
+
+.search-modal__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.4rem;
+  min-height: 80px;
+}
+
+.search-modal__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.search-modal__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 2.5rem 1rem;
+  text-align: center;
+}
+
+.search-result {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  width: 100%;
+  padding: 0.7rem 0.85rem;
+  border-radius: 0.7rem;
+  background: transparent;
+  border: none;
+  text-align: start;
+  cursor: pointer;
+  transition: background 0.12s ease, transform 0.12s ease;
+  color: inherit;
+}
+
+.search-result[data-selected="true"] {
+  background: color-mix(in oklab, var(--color-primary, #6366f1) 14%, transparent);
+  outline: 1px solid color-mix(in oklab, var(--color-primary, #6366f1) 35%, transparent);
+}
+
+.search-result__path {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  color: color-mix(in oklab, var(--color-base-content, #000) 65%, transparent);
+}
+
+.search-result__file {
+  font-weight: 600;
+}
+
+.search-result__sep {
+  opacity: 0.45;
+}
+
+.search-result__heading {
+  opacity: 0.85;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.search-result__snippet {
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: color-mix(in oklab, var(--color-base-content, #000) 82%, transparent);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.search-snippet__match {
+  background: color-mix(in oklab, var(--color-primary, #6366f1) 25%, transparent);
+  color: var(--color-primary, #6366f1);
+  font-weight: 700;
+  padding: 0 2px;
+  border-radius: 3px;
+}
+
+.search-modal__footer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  padding: 0.55rem 0.85rem;
+  border-top: 1px solid color-mix(in oklab, var(--color-base-content, #000) 10%, transparent);
+  background: color-mix(in oklab, var(--color-base-content, #000) 4%, transparent);
+  font-size: 0.7rem;
+  color: color-mix(in oklab, var(--color-base-content, #000) 60%, transparent);
+}
+
+.search-modal__hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.search-modal__kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.1rem;
+  height: 1.15rem;
+  padding: 0 0.3rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  border-radius: 0.3rem;
+  background: var(--color-base-100, #fff);
+  border: 1px solid color-mix(in oklab, var(--color-base-content, #000) 14%, transparent);
+  color: color-mix(in oklab, var(--color-base-content, #000) 70%, transparent);
+}
+
+/* Scroll-to-hash highlight for markdown headings */
+.prose :where(h1, h2, h3, h4, h5, h6)[id] {
+  scroll-margin-top: 1.25rem;
+}
+
+:where(.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6).scroll-target-flash {
+  position: relative;
+  animation: scroll-target-flash 2s ease-out;
+}
+
+/* Temporary keyword highlight on page after navigating from search */
+.search-page-highlight {
+  padding: 0 2px;
+  border-radius: 3px;
+  font-weight: 700;
+  animation: search-highlight-fade 3s ease-out forwards;
+}
+
+@keyframes search-highlight-fade {
+  0% {
+    background-color: color-mix(in oklab, var(--color-primary, #6366f1) 45%, transparent);
+    color: var(--color-primary, #6366f1);
+  }
+  70% {
+    background-color: color-mix(in oklab, var(--color-primary, #6366f1) 20%, transparent);
+    color: var(--color-primary, #6366f1);
+  }
+  100% {
+    background-color: transparent;
+    color: inherit;
+    font-weight: inherit;
+  }
+}
+
+@keyframes scroll-target-flash {
+  0% {
+    background-color: color-mix(in oklab, var(--color-primary, #6366f1) 35%, transparent);
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--color-primary, #6366f1) 18%, transparent);
+  }
+  100% {
+    background-color: transparent;
+    box-shadow: 0 0 0 4px transparent;
+  }
+}
