@@ -161,6 +161,9 @@ function MarkdownPage() {
     ul: ({ children }) => {
       return <ul style={{ margin: 20 }}>{children}</ul>;
     },
+    ol: ({ children }) => {
+      return <ol style={{ margin: 20 }}>{children}</ol>;
+    },
     table: ({ children }) => {
       const text = extractText(children);
       const isRTL = hasPersian(text);
