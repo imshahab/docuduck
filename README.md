@@ -174,7 +174,3 @@ Docuduck is ready for static hosting and subpath deployments.
 - Vite base handling is derived from the repository environment so GitHub Pages-style subpaths work correctly.
 - TanStack Router uses `import.meta.env.BASE_URL` as the router base path.
 - When deploying as a single-page app, make sure your host serves `index.html` for unmatched routes.
-
-## License
-
-No license file is currently included. Add one if you plan to publish or share the project publicly.
